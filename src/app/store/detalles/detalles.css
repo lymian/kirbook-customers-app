@@ -1,0 +1,366 @@
+.detalles-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  color: var(--color-text);
+}
+
+/* --- Navegación --- */
+.top-nav {
+  display: flex;
+  min-height: 57px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  border-bottom: 3px solid var(--color-secondary);
+  padding-bottom: 1rem;
+}
+
+.btn-back {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+.btn-back:hover {
+  color: var(--color-primary);
+}
+
+.breadcrumb-current {
+  color: #888;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* --- Layout Principal --- */
+.detalles-layout {
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  /* 40% imagen, resto info */
+  gap: 4rem;
+  align-items: start;
+}
+
+/* --- Columna Imagen --- */
+.imagen-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  /* La sombra dura estilo Retro */
+  box-shadow: 15px 15px 0px var(--color-secondary);
+  background: white;
+  border: 1px solid var(--color-text);
+}
+
+.imagen-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* Filtro sutil para homogeneizar portadas */
+  filter: contrast(1.05);
+}
+
+.badge-descuento-detalle {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 8px 15px;
+  font-weight: 700;
+  font-size: 1rem;
+  z-index: 2;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Columna Info --- */
+.categoria-tag {
+  display: inline-block;
+  background-color: var(--color-secondary);
+  color: white;
+  padding: 4px 10px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+.titulo-libro {
+  font-family: 'Playfair Display', serif;
+  /* Si no carga, usa serif del sistema */
+  font-size: 2.8rem;
+  line-height: 1.1;
+  margin: 0 0 0.5rem 0;
+  color: var(--color-text);
+}
+
+.autor-libro {
+  font-size: 1.2rem;
+  font-family: serif;
+  font-style: italic;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.autor-libro span {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* Precios */
+.precio-block {
+  margin-bottom: 2rem;
+}
+
+.precios-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.precio-original {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 1rem;
+}
+
+.precio-final {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-family: monospace;
+  /* Toque técnico */
+}
+
+/* Separador decorativo */
+.separador {
+  height: 2px;
+  background: var(--color-text);
+  width: 50px;
+  margin-bottom: 2rem;
+}
+
+/* Sinopsis */
+.sinopsis-block h3 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.sinopsis-block p {
+  line-height: 1.8;
+  /* Importante para lectura larga */
+  font-size: 1.05rem;
+  color: #444;
+  text-align: justify;
+  margin-bottom: 2rem;
+}
+
+/* Especificaciones */
+.specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  background: #fff;
+  border: 1px dashed var(--color-border);
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-item .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.spec-item .value {
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.spec-item .value.low-stock {
+  color: var(--color-secondary);
+  /* Aviso Ocre si queda poco */
+}
+
+/* --- Acciones de Compra --- */
+.acciones-compra {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.control-cantidad {
+  display: flex;
+  border: 2px solid var(--color-text);
+  height: 50px;
+}
+
+.control-cantidad button {
+  width: 40px;
+  background: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: background 0.2s;
+}
+
+.control-cantidad button:hover:not([disabled]) {
+  background: #eee;
+}
+
+.control-cantidad input {
+  width: 50px;
+  border: none;
+  border-left: 1px solid var(--color-text);
+  border-right: 1px solid var(--color-text);
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.btn-agregar {
+  flex: 1;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  height: 50px;
+  /* Sin bordes redondeados */
+}
+
+.btn-agregar:hover {
+  background-color: var(--color-text);
+  /* Cambio a negro café al hover */
+}
+
+.sin-stock-msg {
+  width: 100%;
+  padding: 15px;
+  background: #e0e0e0;
+  color: var(--color-text);
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.aviso-carrito {
+  background-color: rgba(209, 156, 76, 0.2);
+  /* Ocre suave */
+  border: 1px solid var(--color-secondary);
+  padding: 10px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* --- Spinner y Estados (Reutilizados) --- */
+.loading-container,
+.error-container {
+  text-align: center;
+  padding: 5rem;
+}
+
+.spinner-square {
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  margin: 0 auto 1rem;
+  animation: rotate 1.5s infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Modal --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(43, 27, 23, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  border: 2px solid var(--color-primary);
+  box-shadow: 10px 10px 0 var(--color-secondary);
+}
+
+.modal-title {
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.btn-modal {
+  margin-top: 1rem;
+  background: var(--color-text);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .detalles-layout {
+    grid-template-columns: 1fr;
+    /* Una columna */
+    gap: 2rem;
+  }
+
+  .imagen-wrapper {
+    max-width: 250px;
+    /* Imagen más pequeña en móvil */
+  }
+
+  .titulo-libro {
+    font-size: 2rem;
+  }
+
+  .acciones-compra {
+    flex-direction: column;
+  }
+
+  .control-cantidad {
+    width: 100%;
+    justify-content: center;
+  }
+}

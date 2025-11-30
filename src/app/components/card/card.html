@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-img-container">
+    <img [src]="getImagen()" (error)="onImageError($event)" alt="{{ libro.titulo }}" class="card-img" />
+    @if (libro.descuento > 0) {
+    <span class="badge-descuento">-{{ libro.descuento }}%</span>
+    }
+  </div>
+  <div class="card-body">
+    <h3 class="card-title">{{ libro.titulo }}</h3>
+    <p class="card-author">Autor: {{ libro.autorNombre }}</p>
+
+    <div class="price-section">
+      @if (libro.descuento > 0) {
+      <p class="card-price original">S/ {{ libro.precio.toFixed(2) }}</p>
+      <p class="card-price final">S/ {{ (libro.precio * (1 - libro.descuento / 100)).toFixed(2) }}</p>
+      } @else {
+      <p class="card-price">S/ {{ libro.precio.toFixed(2) }}</p>
+      }
+    </div>
+
+    <p class="card-stock" [class.low-stock]="libro.stock < 5">Stock: {{ libro.stock }}</p>
+    <!-- Botón para ver detalles -->
+    <a [routerLink]="['/store/detalles', libro.id]" class="btn-detalles"> Ver detalles </a>
+  </div>
+</div>

@@ -1,0 +1,203 @@
+:host {
+    --c-primary: #8D4030;
+    /* Terracota */
+    --c-secondary: #D19C4C;
+    /* Ocre */
+    --c-text: #2B1B17;
+    /* Café oscuro */
+    --c-bg: #F4F1EA;
+    /* Fondo Hueso */
+    --c-white: #ffffff;
+    --c-border: #ccc;
+}
+
+.register-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    /* Un poco más de altura necesaria */
+    background-color: var(--c-bg);
+    padding: 2rem 1rem;
+}
+
+.register-card {
+    background-color: var(--c-white);
+    width: 100%;
+    max-width: 600px;
+    /* Más ancho que el login para acomodar 2 columnas */
+    padding: 3rem 2rem;
+    border: 1px solid var(--c-text);
+
+    /* Sombra Dura consistente */
+    box-shadow: 12px 12px 0px var(--c-secondary);
+    border-top: 5px solid var(--c-primary);
+}
+
+/* Header */
+.card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px dashed var(--c-border);
+    padding-bottom: 1rem;
+}
+
+.brand-small {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: var(--c-secondary);
+    text-transform: uppercase;
+}
+
+.register-card h2 {
+    font-size: 2rem;
+    color: var(--c-text);
+    margin: 0.5rem 0 0;
+    font-family: serif;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    color: #777;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Formulario */
+.section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--c-primary);
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    border-left: 3px solid var(--c-secondary);
+    padding-left: 8px;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+/* Sistema de Filas (Grid) */
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.form-group.half {
+    width: 50%;
+    /* Ocupa la mitad en la fila */
+}
+
+/* Inputs y Labels */
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--c-text);
+    text-transform: uppercase;
+}
+
+.form-input {
+    padding: 10px 12px;
+    border: 1px solid var(--c-border);
+    background-color: #FAFAFA;
+    font-size: 0.95rem;
+    color: var(--c-text);
+    transition: all 0.3s ease;
+    border-radius: 0;
+    /* Cuadrado */
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: var(--c-primary);
+    background-color: #fff;
+    box-shadow: 4px 4px 0px rgba(141, 64, 48, 0.1);
+}
+
+/* Botón */
+.btn-register {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--c-text);
+    color: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 0;
+    margin-top: 1rem;
+}
+
+.btn-register:hover:not([disabled]) {
+    background-color: var(--c-primary);
+    transform: translateY(-2px);
+}
+
+.btn-register:disabled {
+    background-color: #ccc;
+    cursor: wait;
+}
+
+/* Error */
+.error-box {
+    background-color: rgba(141, 64, 48, 0.1);
+    color: var(--c-primary);
+    padding: 10px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 1px solid var(--c-primary);
+    margin-bottom: 1rem;
+}
+
+/* Footer */
+.card-footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.link-login {
+    color: var(--c-primary);
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.link-login:hover {
+    border-bottom-color: var(--c-primary);
+}
+
+/* Responsive: En móviles todo a 1 columna */
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-group.half {
+        width: 100%;
+    }
+
+    .register-card {
+        padding: 1.5rem;
+    }
+}

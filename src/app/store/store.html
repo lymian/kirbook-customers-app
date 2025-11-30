@@ -1,0 +1,64 @@
+<div class="store-layout">
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <img class="brand-img" src="assets/logo.png" alt="Logo Kirbook">
+        <a routerLink="/store/inicio" class="brand-link">KIRBOOK</a>
+      </div>
+
+      <button class="menu-toggle" (click)="menuOpen = !menuOpen" aria-label="Abrir menú">
+        {{ menuOpen ? '✕' : '☰' }}
+      </button>
+
+      <div class="nav-menu" [class.open]="menuOpen">
+        <ul class="nav-links">
+          <li><a routerLink="inicio" routerLinkActive="active">Inicio</a></li>
+          <li><a routerLink="catalogo" routerLinkActive="active">Catálogo</a></li>
+          <li><a routerLink="carrito" routerLinkActive="active">Carrito</a></li>
+          <li><a routerLink="pedidos" routerLinkActive="active">Pedidos</a></li>
+        </ul>
+
+        <ul class="auth-links">
+          @if (!usuario) {
+          <li><a routerLink="login" routerLinkActive="active" class="btn-auth">Login</a></li>
+          <li><a routerLink="register" routerLinkActive="active" class="btn-auth outline">Registrarse</a></li>
+          } @if (usuario) {
+          <li class="user-greeting">Hola, <span>{{ usuario.nombre }}</span></li>
+          <li><button (click)="logout()" class="btn-logout">Cerrar sesión</button></li>
+          }
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer class="store-footer">
+    <div class="footer-content">
+      <div class="footer-section brand-section">
+        <h3>KIRBOOK</h3>
+        <p>Tu librería online de confianza. <br>Literatura selecta para mentes exigentes.</p>
+      </div>
+
+      <div class="footer-section links-section">
+        <h3>Navegación</h3>
+        <ul>
+          <li><a routerLink="/store/inicio">Inicio</a></li>
+          <li><a routerLink="/store/catalogo">Catálogo</a></li>
+          <li><a routerLink="/store/carrito">Carrito</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section contact-section">
+        <h3>Contacto</h3>
+        <p>info@kirbook.com</p>
+        <p>+51 123 456 789</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Kirbook. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+</div>

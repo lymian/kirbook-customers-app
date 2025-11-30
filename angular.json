@@ -19,6 +19,7 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -54,6 +55,10 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "port": 4300,
+            "host": "localhost"
+          },
           "configurations": {
             "production": {
               "buildTarget": "kirbook-cliente-app:build:production"

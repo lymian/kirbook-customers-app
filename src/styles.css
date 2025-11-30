@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+/* Variables de diseño: Terracota y Ocre */
+:root {
+  --color-primary: #881b05;
+  /* Terracota Profundo (Rojo Ladrillo) */
+  --color-secondary: #c98c30;
+  /* Ocre Dorado (Para acentos/hovers) */
+  --color-dark: #2B1B17;
+  /* Café casi negro (Texto principal) */
+  --color-light: #F4F1EA;
+  /* Blanco Hueso / Papel (Fondo) */
+  --color-footer: #1F1311;
+  /* Café muy oscuro (Footer) */
+  --font-main: 'Roboto', sans-serif;
+  --color-text: #2B1B17;
+  --color-border: #2B1B17;
+}
+
+body {
+  margin: 0;
+}
+
+/* evitar que elementos se desborden */
+* {
+  box-sizing: border-box;
+}

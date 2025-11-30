@@ -1,0 +1,99 @@
+<div class="carrito-container">
+    <div class="page-header">
+        <h2>Tu Carrito de Compras</h2>
+        <span class="item-count" *ngIf="items.length > 0">{{ items.length }} Libros</span>
+    </div>
+
+    @if (items.length > 0) {
+    <div class="cart-header">
+        <div class="col-producto">Producto</div>
+        <div class="col-cantidad">Cantidad</div>
+        <div class="col-total">Subtotal</div>
+        <div class="col-accion"></div>
+    </div>
+
+    <div class="carrito-lista">
+        @for (item of items; track item.id) {
+        <div class="carrito-item">
+
+            <div class="producto-wrapper">
+                <div class="item-imagen">
+                    <img [src]="getImagen(item.id)" (error)="onImageError($event)" alt="{{ item.titulo }}">
+                </div>
+                <div class="item-info">
+                    <h3>{{ item.titulo }}</h3>
+                    <p class="autor">{{ item.autorNombre }}</p>
+
+                    <div class="precio-unitario-block">
+                        @if (item.descuento > 0) {
+                        <span class="precio-original">S/ {{ item.precio.toFixed(2) }}</span>
+                        <span class="badge-dcto">-{{ item.descuento }}%</span>
+                        <span class="precio-final">S/ {{ calcularPrecioFinal(item).toFixed(2) }}</span>
+                        } @else {
+                        <span class="precio-final">S/ {{ item.precio.toFixed(2) }}</span>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="cantidad-wrapper">
+                <div class="qty-selector">
+                    <button (click)="decrementar(item)" [disabled]="item.cantidad <= 1">−</button>
+                    <input type="text" readonly [value]="item.cantidad">
+                    <button (click)="incrementar(item)" [disabled]="item.cantidad >= item.stock">+</button>
+                </div>
+                <span class="stock-info" *ngIf="item.stock < 5">¡Solo quedan {{ item.stock }}!</span>
+            </div>
+
+            <div class="subtotal-wrapper">
+                <span class="label-mobile">Subtotal:</span>
+                <p class="monto-subtotal">S/ {{ (calcularPrecioFinal(item) * item.cantidad).toFixed(2) }}</p>
+            </div>
+
+            <div class="accion-wrapper">
+                <button (click)="eliminar(item.id)" class="btn-eliminar" title="Eliminar ítem">
+                    ✕
+                </button>
+            </div>
+
+        </div>
+        }
+    </div>
+
+    <div class="carrito-resumen">
+        <div class="resumen-content">
+            <div class="resumen-row">
+                <span>Subtotal</span>
+                <span>S/ {{ total.toFixed(2) }}</span>
+            </div>
+            <div class="resumen-row total-row">
+                <span>TOTAL A PAGAR</span>
+                <span class="monto-total">S/ {{ total.toFixed(2) }}</span>
+            </div>
+
+            <button (click)="realizarPedido()" [disabled]="cargando" class="btn-pedido">
+                {{ cargando ? 'PROCESANDO...' : 'PROCEDER AL PAGO' }}
+            </button>
+            <a routerLink="/store/catalogo" class="btn-seguir-comprando">Seguir comprando</a>
+        </div>
+    </div>
+
+    } @else {
+    <div class="carrito-vacio">
+        <div class="empty-icon">📂</div>
+        <h3>Tu bolsa de libros está vacía</h3>
+        <p>Explora nuestro catálogo para encontrar tu próxima lectura.</p>
+        <a href="/store/inicio" class="btn-volver">IR AL CATÁLOGO</a>
+    </div>
+    }
+
+    @if (mostrarModal) {
+    <div class="modal-overlay" (click)="cerrarModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <h3 class="modal-title">Notificación</h3>
+            <p>{{ mensajeModal }}</p>
+            <button (click)="cerrarModal()" class="btn-modal">ACEPTAR</button>
+        </div>
+    </div>
+    }
+</div>

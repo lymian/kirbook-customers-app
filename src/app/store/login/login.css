@@ -1,0 +1,198 @@
+:host {
+    --c-primary: #8D4030;
+    /* Terracota */
+    --c-secondary: #D19C4C;
+    /* Ocre */
+    --c-text: #2B1B17;
+    /* Café oscuro */
+    --c-bg: #F4F1EA;
+    /* Fondo Hueso */
+    --c-white: #ffffff;
+    --c-border: #ccc;
+}
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    /* Centrado verticalmente */
+    background-color: var(--c-bg);
+    padding: 1rem;
+}
+
+.login-card {
+    background-color: var(--c-white);
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem;
+    border: 1px solid var(--c-text);
+
+    /* EL SELLO DE IDENTIDAD: Sombra dura Ocre */
+    box-shadow: 12px 12px 0px var(--c-secondary);
+
+    /* Borde superior decorativo */
+    border-top: 5px solid var(--c-primary);
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Header del Formulario */
+.card-header {
+    text-align: center;
+}
+
+.brand-small {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: var(--c-secondary);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-card h2 {
+    font-size: 1.8rem;
+    color: var(--c-text);
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    font-family: serif;
+    /* Toque clásico */
+}
+
+.separator {
+    width: 50px;
+    height: 2px;
+    background-color: var(--c-text);
+    margin: 0 auto;
+}
+
+/* Inputs y Labels */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--c-text);
+    letter-spacing: 1px;
+}
+
+.form-input {
+    padding: 12px 15px;
+    border: 1px solid var(--c-border);
+    background-color: #FAFAFA;
+    font-size: 1rem;
+    color: var(--c-text);
+    transition: all 0.3s ease;
+
+    /* IMPORTANTE: Cuadrado */
+    border-radius: 0;
+    outline: none;
+}
+
+.form-input::placeholder {
+    color: #bbb;
+}
+
+/* Efecto Focus: Borde Terracota */
+.form-input:focus {
+    border-color: var(--c-primary);
+    background-color: #fff;
+    box-shadow: 4px 4px 0px rgba(141, 64, 48, 0.1);
+}
+
+/* Botón Submit */
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--c-text);
+    /* Negro café por defecto */
+    color: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+
+    /* Cuadrado */
+    border-radius: 0;
+}
+
+.btn-login:hover:not([disabled]) {
+    background-color: var(--c-primary);
+    /* Se vuelve Terracota al hover */
+    transform: translateY(-2px);
+    /* Pequeño salto */
+}
+
+.btn-login:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Caja de Error */
+.error-box {
+    background-color: rgba(141, 64, 48, 0.1);
+    /* Terracota muy suave */
+    border-left: 4px solid var(--c-primary);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--c-primary);
+    font-weight: bold;
+    font-size: 0.9rem;
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* Footer (Links) */
+.login-footer {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+    border-top: 1px dashed var(--c-border);
+    padding-top: 1.5rem;
+}
+
+.link-register {
+    color: var(--c-primary);
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-left: 5px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.link-register:hover {
+    border-bottom-color: var(--c-primary);
+}

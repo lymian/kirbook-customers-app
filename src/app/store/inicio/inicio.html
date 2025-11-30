@@ -1,0 +1,78 @@
+<div class="inicio-container">
+
+    <!-- Hero Carousel -->
+    <section class="carousel">
+        @for (banner of banners; track $index) {
+        <div class="slide" [class.active]="$index === currentBannerIndex">
+            <img [src]="banner" alt="Banner Kirbook">
+
+        </div>
+        }
+
+        <!-- Controls -->
+        <button class="carousel-control prev" (click)="prevBanner()">&#10094;</button>
+        <button class="carousel-control next" (click)="nextBanner()">&#10095;</button>
+
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            @for (banner of banners; track $index) {
+            <span class="dot" [class.active]="$index === currentBannerIndex" (click)="goToBanner($index)"></span>
+            }
+        </div>
+    </section>
+
+    <!-- Featured Books -->
+    <section class="destacados">
+        <h2>Libros Destacados</h2>
+        @if (cargando) {
+        <p class="loading">Cargando destacados...</p>
+        } @else {
+        <div class="libros-grid">
+            @for (libro of librosDestacados; track libro.id) {
+            <div class="libro-card" (click)="verDetalles(libro.id)">
+                <div class="libro-imagen">
+                    <img [src]="getImagen(libro.id)" (error)="onImageError($event)" alt="{{ libro.titulo }}">
+                    @if (libro.descuento > 0) {
+                    <span class="badge-descuento">-{{ libro.descuento }}%</span>
+                    }
+                </div>
+                <div class="libro-info">
+                    <h3>{{ libro.titulo }}</h3>
+                    <p class="autor">{{ libro.autorNombre }}</p>
+                    <div class="precio-container">
+                        @if (libro.descuento > 0) {
+                        <span class="precio-original">S/ {{ libro.precio.toFixed(2) }}</span>
+                        <span class="precio-final">S/ {{ (libro.precio * (1 - libro.descuento / 100)).toFixed(2)
+                            }}</span>
+                        } @else {
+                        <span class="precio-final">S/ {{ libro.precio.toFixed(2) }}</span>
+                        }
+                    </div>
+                    <button class="btn-ver">Ver Detalles</button>
+                </div>
+            </div>
+            }
+        </div>
+        }
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="beneficios">
+        <div class="beneficio-item">
+            <div class="icono">🚀</div>
+            <h3>Envío Rápido</h3>
+            <p>Recibe tus libros en tiempo récord.</p>
+        </div>
+        <div class="beneficio-item">
+            <div class="icono">🔒</div>
+            <h3>Pago Seguro</h3>
+            <p>Tus transacciones están protegidas.</p>
+        </div>
+        <div class="beneficio-item">
+            <div class="icono">🎧</div>
+            <h3>Atención 24/7</h3>
+            <p>Estamos aquí para ayudarte siempre.</p>
+        </div>
+    </section>
+
+</div>

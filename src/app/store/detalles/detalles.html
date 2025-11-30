@@ -1,0 +1,103 @@
+@if (!cargando && libro) {
+<div class="detalles-container">
+
+  <div class="top-nav">
+    <a routerLink="/store/catalogo" class="btn-back">← Volver al Catálogo</a>
+    <span class="breadcrumb-current">{{ libro.categoriaNombre }} / {{ libro.titulo }}</span>
+  </div>
+
+  <div class="detalles-layout">
+
+    <div class="col-imagen">
+      <div class="imagen-wrapper">
+        <img [src]="getImagen()" (error)="onImageError($event)" alt="{{ libro.titulo }}" />
+        @if (libro.descuento > 0) {
+        <span class="badge-descuento-detalle">-{{ libro.descuento }}% OFF</span>
+        }
+      </div>
+    </div>
+
+    <div class="col-info">
+      <span class="categoria-tag">{{ libro.categoriaNombre }}</span>
+
+      <h1 class="titulo-libro">{{ libro.titulo }}</h1>
+      <p class="autor-libro">Por <span>{{ libro.autorNombre }}</span></p>
+
+      <div class="precio-block">
+        @if (libro.descuento > 0) {
+        <div class="precios-stack">
+          <span class="precio-original">S/ {{ libro.precio.toFixed(2) }}</span>
+          <span class="precio-final">S/ {{ (libro.precio * (1 - libro.descuento / 100)).toFixed(2) }}</span>
+        </div>
+        } @else {
+        <span class="precio-final">S/ {{ libro.precio.toFixed(2) }}</span>
+        }
+      </div>
+
+      <div class="separador"></div>
+
+      <div class="sinopsis-block">
+        <h3>Sinopsis</h3>
+        <p>{{ libro.sinopsis }}</p>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-item">
+          <span class="label">Publicado:</span>
+          <span class="value">{{ libro.fechaPublicacion | date:'d MMMM, yyyy' }}</span>
+        </div>
+        <div class="spec-item">
+          <span class="label">Disponibilidad:</span>
+          <span class="value" [class.low-stock]="libro.stock < 5">
+            {{ libro.stock > 0 ? libro.stock + ' unidades' : 'Agotado' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="acciones-compra">
+        @if (libro.stock > 0) {
+        <div class="control-cantidad">
+          <button (click)="decrementarCantidad()" [disabled]="cantidad <= 1">−</button>
+          <input type="number" [(ngModel)]="cantidad" min="1" [max]="libro.stock" readonly>
+          <button (click)="incrementarCantidad()" [disabled]="cantidad >= libro.stock">+</button>
+        </div>
+
+        <button (click)="agregarAlCarrito()" class="btn-agregar">
+          AGREGAR A LA BOLSA
+        </button>
+        } @else {
+        <div class="sin-stock-msg">Producto Agotado</div>
+        }
+      </div>
+
+      @if (cantidadEnCarrito > 0) {
+      <div class="aviso-carrito">
+        <span class="icon">🛍</span>
+        Ya tienes {{ cantidadEnCarrito }} de este libro en tu carrito.
+      </div>
+      }
+    </div>
+  </div>
+</div>
+
+@if (mostrarModal) {
+<div class="modal-overlay" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3 class="modal-title">Mensaje</h3>
+    <p>{{ mensajeModal }}</p>
+    <button (click)="cerrarModal()" class="btn-modal">ENTENDIDO</button>
+  </div>
+</div>
+}
+
+} @else if (cargando) {
+<div class="loading-container">
+  <div class="spinner-square"></div>
+  <p>Recuperando detalles del libro...</p>
+</div>
+} @else if (error) {
+<div class="error-container">
+  <p>{{ error }}</p>
+  <a routerLink="/store/catalogo" class="btn-back">Volver al catálogo</a>
+</div>
+}

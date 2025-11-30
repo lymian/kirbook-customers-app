@@ -1,0 +1,260 @@
+.pedidos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    min-height: 80vh;
+}
+
+/* --- Header de la página --- */
+.page-header {
+    border-bottom: 3px solid var(--color-secondary);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+
+.page-header h2 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    color: #666;
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+/* --- Estados Generales (Loading, Auth, Empty) --- */
+.state-container {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border: 1px solid var(--c-border);
+    margin-top: 2rem;
+}
+
+.icon-lock {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    filter: grayscale(1);
+    /* Icono sobrio */
+}
+
+.btn-solid {
+    display: inline-block;
+    background: var(--color-secondary);
+    color: white;
+    padding: 10px 25px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 1rem;
+    transition: background 0.3s;
+}
+
+.btn-solid:hover {
+    background: var(--color-primary);
+}
+
+/* Spinner Cuadrado (Reutilizado) */
+.spinner-square {
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-primary);
+    margin: 0 auto 1rem;
+    animation: rotate-square 1.5s infinite ease-in-out;
+}
+
+@keyframes rotate-square {
+    0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    }
+
+    50% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
+    }
+}
+
+/* --- Tabs de Filtros --- */
+.filtros-estado {
+    display: flex;
+    gap: 2rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 2rem;
+}
+
+.filtros-estado button {
+    background: none;
+    border: none;
+    padding: 1rem 0;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #888;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.filtros-estado button:hover {
+    color: var(--color-primary);
+}
+
+.filtros-estado button.active {
+    color: var(--color-text);
+    border-bottom-color: var(--color-primary);
+    /* Línea activa Terracota */
+}
+
+/* --- Grid de Pedidos --- */
+.pedidos-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+/* --- Tarjeta de Pedido (Estilo Factura) --- */
+.pedido-card {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-left-width: 6px;
+    /* Borde izquierdo grueso para el estado */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+/* Hover: Levantar ligeramente y sombra dura */
+.pedido-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Colores según estado (Clases dinámicas) */
+.pedido-card.pendiente {
+    border-left-color: var(--st-pendiente);
+}
+
+.pedido-card.finalizado {
+    border-left-color: var(--st-finalizado);
+}
+
+.pedido-card.cancelado {
+    border-left-color: var(--st-cancelado);
+}
+
+/* Header de la Tarjeta */
+.pedido-header {
+    padding: 1rem 1.5rem;
+    background-color: #f9f9f9;
+    border-bottom: 1px dashed var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pedido-id {
+    display: block;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--color-text);
+}
+
+.pedido-fecha {
+    font-size: 0.85rem;
+    color: var(--color-text);
+}
+
+.estado-label {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 4px 8px;
+    border: 1px solid var(--color-text);
+}
+
+/* Cuerpo con detalles */
+.pedido-cuerpo {
+    padding: 1.5rem;
+}
+
+.detalle-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+}
+
+.detalle-item:last-child {
+    margin-bottom: 0;
+}
+
+.qty {
+    font-weight: bold;
+    color: var(--color-primary);
+    margin-right: 5px;
+}
+
+.tag-desc {
+    font-size: 0.8rem;
+    color: var(--c-secondary);
+}
+
+.detalle-precio {
+    font-family: monospace;
+}
+
+/* Footer con Total */
+.pedido-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--color-text);
+    /* Línea divisoria fuerte */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+.label-total {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.monto-total {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    font-family: monospace;
+    /* Alineación numérica perfecta */
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .filtros-estado {
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .filtros-estado button {
+        font-size: 0.85rem;
+    }
+
+    .pedido-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .meta-right {
+        width: 100%;
+        text-align: right;
+    }
+}

@@ -1,0 +1,86 @@
+<div class="pedidos-container">
+    <div class="page-header">
+        <h2>Historial de Pedidos</h2>
+    </div>
+
+    @if (!usuarioLogueado) {
+    <div class="state-container no-auth">
+        <div class="icon-lock">🔒</div>
+        <h3>Acceso Restringido</h3>
+        <p>Necesitas identificarte para consultar tu archivo de pedidos.</p>
+        <a href="/store/login" class="btn-solid">Iniciar Sesión</a>
+    </div>
+    } @else {
+
+    <div class="filtros-estado">
+        <button [class.active]="estadoSeleccionado === 'pendiente'" (click)="cambiarEstado('pendiente')">
+            Pendientes
+        </button>
+        <button [class.active]="estadoSeleccionado === 'finalizado'" (click)="cambiarEstado('finalizado')">
+            Finalizados
+        </button>
+        <button [class.active]="estadoSeleccionado === 'cancelado'" (click)="cambiarEstado('cancelado')">
+            Cancelados
+        </button>
+    </div>
+
+    @if (cargando) {
+    <div class="state-container loading">
+        <div class="spinner-square"></div>
+        <p>Recuperando archivo...</p>
+    </div>
+    } @else if (error) {
+    <div class="state-container error">
+        <p>⚠ {{ error }}</p>
+    </div>
+    } @else {
+
+    @if (pedidosFiltrados.length > 0) {
+    <div class="pedidos-grid">
+        @for (pedido of pedidosFiltrados; track pedido.id) {
+        <div class="pedido-card" [ngClass]="pedido.estado.toLowerCase()">
+
+            <div class="pedido-header">
+                <div class="meta-left">
+                    <span class="pedido-id">REF: #{{ pedido.id }}</span>
+                    <span class="pedido-fecha">{{ pedido.fecha | date:'dd/MM/yyyy - HH:mm' }}</span>
+                </div>
+                <div class="meta-right">
+                    <span class="estado-label">{{ pedido.estado }}</span>
+                </div>
+            </div>
+
+            <div class="pedido-cuerpo">
+                <div class="lista-detalles">
+                    @for (detalle of pedido.detalles; track detalle.id) {
+                    <div class="detalle-item">
+                        <div class="detalle-nombre">
+                            <span class="qty">{{ detalle.cantidad }}x</span>
+                            {{ detalle.libroTitulo }}
+                            @if (detalle.descuentoAplicado > 0) {
+                            <span class="tag-desc">(-{{ detalle.descuentoAplicado }}%)</span>
+                            }
+                        </div>
+                        <div class="detalle-precio">
+                            S/ {{ detalle.subtotal.toFixed(2) }}
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="pedido-footer">
+                <span class="label-total">Total Facturado</span>
+                <span class="monto-total">S/ {{ pedido.total.toFixed(2) }}</span>
+            </div>
+        </div>
+        }
+    </div>
+    } @else {
+    <div class="state-container empty">
+        <p class="no-pedidos">No hay registros en la categoría "{{ estadoSeleccionado }}".</p>
+    </div>
+    }
+    }
+    }
+</div>

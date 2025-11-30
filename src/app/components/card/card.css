@@ -1,0 +1,175 @@
+:host {
+  /* Variables locales para facilitar ajustes */
+  --c-primary: #8D4030;
+  /* Terracota */
+  --c-secondary: #D19C4C;
+  /* Ocre */
+  --c-text: #2B1B17;
+  /* Café oscuro */
+  --c-gray: #757575;
+  /* Gris texto secundario */
+  --c-bg: #ffffff;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* Ocupa toda la altura disponible en la grilla */
+  background-color: var(--c-bg);
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  /* IMPORTANTE: Sin bordes redondeados */
+  border-radius: 0;
+}
+
+/* Efecto Hover: Sombra dura desplazada (estilo retro/editorial) */
+.card:hover {
+  /* Movimiento sutil hacia arriba */
+  box-shadow: 6px 6px 0px rgba(141, 64, 48, 0.15);
+}
+
+/* --- Contenedor de Imagen --- */
+.card-img-container {
+  position: relative;
+  width: 100%;
+  /* Proporción estándar de libros (2:3) */
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Efecto sutil en la imagen al hacer hover */
+.card:hover .card-img {
+  filter: sepia(20%);
+  /* Un ligero tono antiguo */
+}
+
+/* Badge de Descuento */
+.badge-descuento {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--c-primary);
+  color: white;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  z-index: 2;
+  /* Cuadrado */
+  border-radius: 0;
+}
+
+/* --- Cuerpo de la Tarjeta --- */
+.card-body {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  /* Esto hace que el cuerpo llene el espacio restante */
+}
+
+/* Título */
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--c-text);
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+
+  /* Limita el título a 2 líneas y pone puntos suspensivos si es muy largo */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Autor */
+.card-author {
+  font-size: 0.9rem;
+  color: var(--c-gray);
+  margin: 0 0 1rem 0;
+  font-style: italic;
+  font-family: 'Times New Roman', serif;
+  /* Toque clásico para el autor */
+}
+
+/* --- Sección de Precio --- */
+.price-section {
+  margin-top: auto;
+  /* Empuja el precio hacia abajo si hay espacio extra */
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.card-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--c-text);
+  margin: 0;
+}
+
+.card-price.original {
+  font-size: 0.9rem;
+  text-decoration: line-through;
+  color: #999;
+  font-weight: 400;
+}
+
+.card-price.final {
+  color: var(--c-primary);
+  /* Precio oferta en Terracota */
+}
+
+/* --- Stock --- */
+.card-stock {
+  font-size: 0.8rem;
+  color: var(--c-gray);
+  margin-bottom: 1rem;
+}
+
+.card-stock.low-stock {
+  color: var(--c-secondary);
+  /* Ocre para advertencia (no rojo para no alarmar) */
+  font-weight: 600;
+}
+
+/* --- Botón --- */
+.btn-detalles {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: var(--c-text);
+  background-color: transparent;
+  border: 1px solid var(--c-text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  /* Cuadrado */
+  border-radius: 0;
+}
+
+/* Hover del botón: Se llena de Terracota */
+.card:hover .btn-detalles {
+  background-color: var(--c-primary);
+  border-color: var(--c-primary);
+  color: white;
+}
