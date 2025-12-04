@@ -16,7 +16,8 @@ jobs:
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v3
-
+      - name: Clean cache
+        run: npm cache clean --force
       # 🔹 Forzar Node 20 para Angular 20+
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -53,4 +54,5 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_PEBBLE_05A9C5510 }}
           action: "close"
+
 
