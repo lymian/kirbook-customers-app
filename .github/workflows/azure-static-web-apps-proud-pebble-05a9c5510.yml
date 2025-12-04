@@ -16,13 +16,16 @@ jobs:
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v3
-      - name: Clean cache
-        run: npm cache clean --force
-      # 🔹 Forzar Node 20 para Angular 20+
+
+      # 🔹 Forzar Node 20 en runner de GitHub (opcional)
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
+          node-version: '22.14.0'
+
+      # 🔹 Limpiar cache de npm (opcional)
+      - name: Clean cache
+        run: npm cache clean --force
 
       # 🔹 Instalar dependencias
       - name: Install Dependencies
@@ -32,16 +35,17 @@ jobs:
       - name: Build Angular App
         run: npm run build --if-present
 
-      # 🔹 Deploy a Azure Static Web Apps
+      # 🔹 Deploy a Azure Static Web Apps (Oryx usará Node 20)
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_PEBBLE_05A9C5510 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/"  # tu código Angular
-          api_location: ""   # si no tienes API
+          app_location: "/"  
+          api_location: ""   
           output_location: "dist/kirbook-cliente-app"
+          node_version: "22.14.0"   # ← Esto le dice a Oryx usar Node 20 para el build
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -54,5 +58,3 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_PEBBLE_05A9C5510 }}
           action: "close"
-
-
