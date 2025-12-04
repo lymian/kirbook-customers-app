@@ -17,9 +17,9 @@ export class Inicio implements OnInit, OnDestroy {
 
   // Carousel
   banners: string[] = [
-    'assets/banner01.png',
-    'assets/banner02.png',
-    'assets/banner03.png'
+    'https://firebasestorage.googleapis.com/v0/b/kirbook.firebasestorage.app/o/banner01.png?alt=media',
+    'https://firebasestorage.googleapis.com/v0/b/kirbook.firebasestorage.app/o/banner02.png?alt=media',
+    'https://firebasestorage.googleapis.com/v0/b/kirbook.firebasestorage.app/o/banner03.png?alt=media'
   ];
   currentBannerIndex: number = 0;
   intervalId: any;
