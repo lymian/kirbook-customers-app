@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22.14.0'
+          node-version: '20.x'
 
       # 🔹 Limpiar cache de npm (opcional)
       - name: Clean cache
@@ -45,7 +45,7 @@ jobs:
           app_location: "/"  
           api_location: ""   
           output_location: "dist/kirbook-cliente-app"
-          node_version: "22.14.0"   # ← Esto le dice a Oryx usar Node 20 para el build
+          node_version: "20.x"   # ← Esto le dice a Oryx usar Node 20 para el build
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
