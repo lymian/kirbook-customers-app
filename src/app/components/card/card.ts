@@ -14,8 +14,9 @@ export class CardComponent {
   @Input() libro!: Libro;
 
   /** Devuelve la URL de la imagen, o default si no existe */
+  // nueva url de la imagen: https://firebasestorage.googleapis.com/v0/b/kirbook.firebasestorage.app/o/3.png?alt=media
   getImagen(): string {
-    return `http://localhost:8080/${this.libro.id}.png`;
+    return `https://firebasestorage.googleapis.com/v0/b/kirbook.firebasestorage.app/o/${this.libro.id}.png?alt=media`;
   }
 
   /** Manejar error de imagen */

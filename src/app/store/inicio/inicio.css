@@ -252,6 +252,7 @@
 
 /* ================= BENEFICIOS ================= */
 .beneficios {
+    width: 100%;
     background-color: #f4f1ea;
     /* Mismo tono hueso que el fondo global */
     padding: 4rem 1rem;

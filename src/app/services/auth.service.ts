@@ -11,7 +11,7 @@ import { LoginResponse } from '../models/auth.model';
     providedIn: 'root',
 })
 export class AuthService {
-    private baseUrl = 'http://localhost:8080/auth';
+    private baseUrl = 'https://kirbook.api.lymian.xyz/auth';
 
     constructor(private http: HttpClient) { }
 

@@ -49,7 +49,7 @@ export class Detalles implements OnInit {
 
   /** Devuelve la URL de la imagen, o default si no existe */
   getImagen(): string {
-    return this.libro ? `http://localhost:8080/${this.libro.id}.png` : '';
+    return this.libro ? `https://firebasestorage.googleapis.com/v0/b/kirbook.firebasestorage.app/o/${this.libro.id}.png?alt=media` : '';
   }
 
   onImageError(event: Event) {

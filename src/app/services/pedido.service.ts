@@ -7,7 +7,7 @@ import { PedidoRequest, PedidoResponse } from '../models/pedido.model';
     providedIn: 'root'
 })
 export class PedidoService {
-    private apiUrl = 'http://localhost:8080/pedidos';
+    private apiUrl = 'https://kirbook.api.lymian.xyz/pedidos';
 
     constructor(private http: HttpClient) { }
 

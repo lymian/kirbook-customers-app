@@ -73,7 +73,7 @@ export class Carrito implements OnInit {
   }
 
   getImagen(id: number): string {
-    return `http://localhost:8080/${id}.png`;
+    return `https://firebasestorage.googleapis.com/v0/b/kirbook.firebasestorage.app/o/${id}.png?alt=media`;
   }
 
   onImageError(event: Event) {
