@@ -8,7 +8,9 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
     const router = inject(Router);
 
     let authReq = req;
-    if (token) {
+    const isWatsonRequest = req.url.includes('api.au-syd.assistant.watson.cloud.ibm.com');
+
+    if (token && !isWatsonRequest) {
         authReq = req.clone({
             setHeaders: { Authorization: `Bearer ${token}` }
         });
