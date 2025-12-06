@@ -1,0 +1,34 @@
+<div class="chatbot-wrapper">
+    <!-- Botón flotante -->
+    <button class="chat-toggle-btn" (click)="toggleChat()" [class.open]="isOpen">
+        <span *ngIf="!isOpen">💬</span>
+        <span *ngIf="isOpen">✕</span>
+    </button>
+
+    <!-- Ventana del chat -->
+    <div class="chat-container" *ngIf="isOpen">
+        <div class="chat-header">
+            <h3>Asistente Virtual</h3>
+        </div>
+
+        <div class="messages" #scrollContainer>
+            <div *ngFor="let msg of messages" [class.user]="msg.from === 'user'" [class.bot]="msg.from === 'bot'"
+                class="message-bubble">
+                <div class="message-content">
+                    {{ msg.text }}
+                </div>
+            </div>
+            <div *ngIf="messages.length === 0" class="empty-state">
+                <p>¡Hola! ¿En qué puedo ayudarte hoy?</p>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" [(ngModel)]="userMessage" placeholder="Escribe un mensaje..."
+                (keyup.enter)="sendMessage()" />
+            <button class="send-btn" (click)="sendMessage()">
+                ➤
+            </button>
+        </div>
+    </div>
+</div>

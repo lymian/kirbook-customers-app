@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
+import { ChatbotComponent } from '../components/chatbot.component';
 
 @Component({
   selector: 'app-store',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, ChatbotComponent],
   templateUrl: './store.html',
   styleUrls: ['./store.css'],
 })
