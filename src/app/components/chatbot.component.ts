@@ -4,6 +4,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WatsonService } from '../services/watson.service';
 
+interface ChatMessage {
+    from: 'user' | 'bot';
+    text?: string;
+    options?: { label: string, value: { input: { text: string } } }[];
+}
+
 @Component({
     selector: 'app-chatbot',
     standalone: true,
@@ -16,7 +22,7 @@ export class ChatbotComponent implements AfterViewChecked {
     @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
 
     userMessage: string = '';
-    messages: { from: 'user' | 'bot', text: string }[] = [];
+    messages: ChatMessage[] = [];
     isOpen: boolean = false;
 
     constructor(private watsonService: WatsonService) { }
@@ -48,12 +54,35 @@ export class ChatbotComponent implements AfterViewChecked {
         const textToSend = this.userMessage;
         this.userMessage = '';
 
-        // Enviar a Watson
-        const response = await this.watsonService.sendMessage(textToSend);
+        try {
+            // Enviar a Watson
+            const response = await this.watsonService.sendMessage(textToSend);
 
-        const botResponse =
-            response.output?.generic?.[0]?.text || 'No entendí tu mensaje.';
+            // Procesar respuestas genéricas
+            if (response.output && response.output.generic && response.output.generic.length > 0) {
+                response.output.generic.forEach((g: any) => {
+                    if (g.response_type === 'text') {
+                        this.messages.push({ from: 'bot', text: g.text });
+                    } else if (g.response_type === 'option') {
+                        this.messages.push({
+                            from: 'bot',
+                            text: g.title || 'Por favor selecciona una opción:', // A veces viene title
+                            options: g.options
+                        });
+                    }
+                });
+            } else {
+                this.messages.push({ from: 'bot', text: 'No entendí tu mensaje o no hubo respuesta.' });
+            }
 
-        this.messages.push({ from: 'bot', text: botResponse });
+        } catch (error) {
+            console.error(error);
+            this.messages.push({ from: 'bot', text: 'Ocurrió un error al comunicar con el asistente.' });
+        }
+    }
+
+    handleOptionClick(optionValue: string) {
+        this.userMessage = optionValue;
+        this.sendMessage();
     }
 }

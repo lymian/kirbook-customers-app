@@ -15,7 +15,15 @@
             <div *ngFor="let msg of messages" [class.user]="msg.from === 'user'" [class.bot]="msg.from === 'bot'"
                 class="message-bubble">
                 <div class="message-content">
-                    {{ msg.text }}
+                    <span *ngIf="msg.text">{{ msg.text }}</span>
+                    
+                    <div *ngIf="msg.options" class="options-container">
+                        <button *ngFor="let opt of msg.options" 
+                                class="option-btn" 
+                                (click)="handleOptionClick(opt.value.input.text)">
+                            {{ opt.label }}
+                        </button>
+                    </div>
                 </div>
             </div>
             <div *ngIf="messages.length === 0" class="empty-state">
