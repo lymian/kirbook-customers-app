@@ -3,12 +3,16 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Libro } from '../models/libro.model';
+import { Categoria } from '../models/categoria.model';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class LibroService {
   private baseUrl = 'https://kirbook.api.lymian.xyz/libros';
+  private categoriasUrl = 'https://kirbook.api.lymian.xyz/categorias';
+
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +29,28 @@ export class LibroService {
       .get<Libro>(`${this.baseUrl}/${id}`)
       .pipe(catchError(this.manejarError));
   }
+
+  /** Obtener todas las categorías */
+  obtenerCategorias(): Observable<Categoria[]> {
+    return this.http
+      .get<Categoria[]>(this.categoriasUrl)
+      .pipe(catchError(this.manejarError));
+  }
+
+  /** Obtener libros por categoría */
+  obtenerLibrosPorCategoria(id: number): Observable<Libro[]> {
+    return this.http
+      .get<Libro[]>(`${this.baseUrl}/categoria/${id}/estado/true`)
+      .pipe(catchError(this.manejarError));
+  }
+
+  /** Buscar libros por frase */
+  buscarLibros(frase: string): Observable<Libro[]> {
+    return this.http
+      .get<Libro[]>(`${this.baseUrl}/buscar?frase=${frase}&estado=true`)
+      .pipe(catchError(this.manejarError));
+  }
+
 
   /** Manejo de errores */
   private manejarError(error: HttpErrorResponse) {

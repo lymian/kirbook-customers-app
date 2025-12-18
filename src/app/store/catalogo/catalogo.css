@@ -7,7 +7,7 @@
 
 /*Header con línea divisoria estilo editorial*/
 .catalogo-header {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     border-bottom: 3px solid var(--color-secondary);
     padding-bottom: 1rem;
     display: flex;
@@ -35,7 +35,7 @@
     display: grid;
     grid-template-columns: 250px 1fr;
     /* Sidebar fijo 250px, resto flexible */
-    gap: 3rem;
+    gap: 1rem;
 }
 
 /* Estilos del Sidebar */
@@ -135,10 +135,70 @@
     .contenido-principal {
         grid-template-columns: 1fr;
         /* Sidebar pasa arriba o desaparece en móvil */
+        gap: 1.5rem;
     }
 
     .filtros-sidebar {
-        display: none;
-        /* Ocultamos sidebar en móvil por simplicidad, o podrías hacerlo un acordeón */
+        display: block;
+        /* Mostrar sidebar en mobile */
+        margin-bottom: 2rem;
+        background: #f9f9f9;
+        padding: 1rem;
+        border-radius: 8px;
     }
+}
+
+/* Estilos del Buscador */
+.buscador-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    /* Separar de las categorias */
+    width: 100%;
+}
+
+.input-busqueda {
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    /* Menos redondeado para encajar mejor */
+    outline: none;
+    transition: all 0.3s;
+    width: 100%;
+    font-family: inherit;
+}
+
+.input-busqueda:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-buscar {
+    background: var(--color-primary);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 38px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background 0.3s;
+    flex-shrink: 0;
+}
+
+.btn-buscar:hover {
+    transform: scale(1.05);
+    background: var(--color-secondary);
+}
+
+/* No results state */
+.no-results {
+    text-align: center;
+    padding: 3rem;
+    color: #777;
+    font-style: italic;
+    grid-column: 1 / -1;
 }

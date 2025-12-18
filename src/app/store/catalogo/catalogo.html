@@ -2,16 +2,48 @@
   <header class="catalogo-header">
     <h2 class="titulo-seccion">Catálogo de Obras</h2>
   </header>
-  <main class="grid-area">
-    <div *ngIf="cargando" class="loading-container">
-      <div class="spinner-square"></div>
-      <p>Recuperando archivo...</p>
-    </div>
-    <div *ngIf="error" class="error-container">
-      <div class="error-icon">!</div>
-      <p>{{ error }}</p>
-      <button class="btn-retry">Intentar nuevamente</button>
-    </div>
-    <app-list-card *ngIf="!cargando && !error" [libros]="libros"></app-list-card>
-  </main>
+
+  <div class="contenido-principal">
+
+    <aside class="filtros-sidebar">
+      <!-- Mover buscador aquí -->
+      <div class="buscador-container">
+        <input type="text" class="input-busqueda" [(ngModel)]="busqueda" (keyup.enter)="buscar()"
+          placeholder="Buscar...">
+        <button class="btn-buscar" (click)="buscar()">
+          <span class="search-icon">🔍</span>
+        </button>
+      </div>
+
+      <h3>Categorías</h3>
+      <ul>
+        <li [class.active]="categoriaSeleccionada === null" (click)="limpiarFiltros()">
+          Todas
+        </li>
+        <li *ngFor="let cat of categorias" [class.active]="categoriaSeleccionada === cat.id"
+          (click)="filtrarPorCategoria(cat.id)">
+          {{ cat.nombre }}
+        </li>
+      </ul>
+    </aside>
+
+    <main class="grid-area">
+      <div *ngIf="cargando" class="loading-container">
+        <div class="spinner-square"></div>
+        <p>Recuperando archivo...</p>
+      </div>
+
+      <div *ngIf="error" class="error-container">
+        <div class="error-icon">!</div>
+        <p>{{ error }}</p>
+        <button class="btn-retry" (click)="cargarLibros()">Intentar nuevamente</button>
+      </div>
+
+      <app-list-card *ngIf="!cargando && !error" [libros]="libros"></app-list-card>
+
+      <div *ngIf="!cargando && !error && libros.length === 0" class="no-results">
+        <p>No se encontraron libros.</p>
+      </div>
+    </main>
+  </div>
 </div>
