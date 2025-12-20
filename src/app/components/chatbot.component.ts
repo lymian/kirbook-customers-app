@@ -62,11 +62,12 @@ export class ChatbotComponent implements AfterViewChecked {
             if (response.output && response.output.generic && response.output.generic.length > 0) {
                 response.output.generic.forEach((g: any) => {
                     if (g.response_type === 'text') {
-                        this.messages.push({ from: 'bot', text: g.text });
+                        this.messages.push({ from: 'bot', text: this.formatDatesInText(g.text) });
                     } else if (g.response_type === 'option') {
+                        const title = g.title || 'Por favor selecciona una opción:';
                         this.messages.push({
                             from: 'bot',
-                            text: g.title || 'Por favor selecciona una opción:', // A veces viene title
+                            text: this.formatDatesInText(title),
                             options: g.options
                         });
                     }
@@ -84,5 +85,37 @@ export class ChatbotComponent implements AfterViewChecked {
     handleOptionClick(optionValue: string) {
         this.userMessage = optionValue;
         this.sendMessage();
+    }
+
+    private formatDatesInText(text: string): string {
+        if (!text) return text;
+        // Regex para buscar fechas tipo: "21 dic 2025"
+        // \b(\d{1,2})\s+([a-zA-Z]{3})\.?\s+(\d{4})\b
+        // Mapeo básico de meses abreviados (asumiendo que vienen en español o inglés similar)
+        const monthMap: { [key: string]: string } = {
+            'ene': 'enero', 'jan': 'enero',
+            'feb': 'febrero',
+            'mar': 'marzo',
+            'abr': 'abril', 'apr': 'abril',
+            'may': 'mayo',
+            'jun': 'junio',
+            'jul': 'julio',
+            'ago': 'agosto', 'aug': 'agosto',
+            'sep': 'septiembre', 'set': 'septiembre',
+            'oct': 'octubre',
+            'nov': 'noviembre',
+            'dic': 'diciembre', 'dec': 'diciembre'
+        };
+
+        return text.replace(/\b(\d{1,2})\s+([a-zA-Z]{3})\.?\s+(\d{4})\b/gi, (match, day, monAbbrev, year) => {
+            const lowerMon = monAbbrev.toLowerCase();
+            const fullMonth = monthMap[lowerMon];
+
+            if (fullMonth) {
+                // Formato peruano/español completo: "21 de diciembre de 2025"
+                return `${day} de ${fullMonth} de ${year}`;
+            }
+            return match; // Si no coincide el mes, devolver original
+        });
     }
 }

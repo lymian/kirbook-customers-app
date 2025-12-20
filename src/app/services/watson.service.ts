@@ -51,6 +51,13 @@ export class WatsonService {
             input: {
                 message_type: 'text',
                 text: text
+            },
+            context: {
+                global: {
+                    system: {
+                        timezone: 'America/Lima'
+                    }
+                }
             }
         };
 
